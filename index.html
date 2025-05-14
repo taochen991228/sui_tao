@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小桃工作室-SUI生态</title>
+    <style>
+
+
+        body {
+            background-color: #b3e0ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-height: 600px;
+            overflow-y: auto;
+            border: 2px solid #ccc;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .tag {
+            width: 180px;
+            height: 50px;
+            margin: 15px;
+            background-color: #c9ff66;
+            text-align: left;
+            padding-left: 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .tag:hover {
+            background-color: #ff9933;
+        }
+        .big-tag {
+            width: 100%;
+            max-width: 350px;
+            height: 60px;
+            margin: 20px;
+            background-color: #cfc2a8;
+            text-align: center;
+            line-height: 60px;
+            font-size: 20px;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .big-tag:hover {
+            background-color: #ff9933;
+        }
+        .bottom-tag {
+            width: 100%;
+            max-width: 250px;
+            height: 40px;
+            background-color: #ffcc66;
+            text-align: center;
+            line-height: 40px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .bottom-tag:hover {
+            background-color: #ff9933;
+        }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .checkbox.checked {
+            background-color: green;
+        }
+        .checkbox.checked::after {
+            content: "✔";
+            color: white;
+            font-size: 16px;
+        }
+        .counter {
+            font-size: 14px;
+            margin-left: 5px;
+        }
+        .number {
+            width: 30px;
+            font-weight: bold;
+        }
+        .remark-container {
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+            margin-top: 20px;
+            background-color: #f0f8ff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 16px;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #fixed-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        #fixed-tags-container .tag {
+            background-color: #ffa7a7; /* 标签的背景颜色 */
+            border: 2px solid #ccc;
+            color: #333; /* 标签的文字颜色 */
+        }
+
+        #hight-tags-container .tag {
+            background-color: #ce8ed5; /* 标签的背景颜色 */
+            border: 2px solid #ccc;
+            color: #333; /* 标签的文字颜色 */
+        }
+
+
+        #me-tags-container .tag {
+            background-color: #946ec7; /* 标签的背景颜色 */
+            border: 2px solid #ccc;
+            color: #333; /* 标签的文字颜色 */
+        }
+
+
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+            .tag, .big-tag, .bottom-tag {
+                width: 90%;
+                max-width: 280px;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tag, .big-tag, .bottom-tag {
+                width: 100%;
+                margin: 5px 0;
+            }
+            .remark-container {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: flex-start; gap: 10px; width: 100%; max-width: 700px;">
+
+
+        <div class="big-tag" onclick="window.open('https://suiscan.xyz/mainnet/home', '_blank')">
+        suiscan
+        </div>
+
+
+        <div class="big-tag" onclick="window.open('chrome-extension://opcgpfmipidbgpenhmajoajpbobppdil/index.html#/Home/Tokens', '_blank')">
+        钱包扩展
+        </div>
+
+
+
+    </div>
+
+
+    <div class="container" id="me-tags-container"></div>
+
+
+
+    <div class="container" id="hight-tags-container">
+    </div>
+    
+    <div class="container" id="fixed-tags-container">
+    </div>
+
+    <div class="container" id="tag-container">
+    </div>
+
+
+
+    
+
+    <script>
+
+    const meTags = [
+    {"name": "Suilend", "url": "https://suilend.fi/swap/SUI-SEND"},
+    {"name": "Cetus", "url": "https://app.cetus.zone/swap"},
+    {"name": "Navi", "url": "https://app.naviprotocol.io/"},
+    {"name": "Aftermath ", "url": "https://aftermath.finance/trade?from=USDC&to=SUI"},
+    {"name": "Nexa", "url": "https://app.nexa.xyz/"},
+    {"name": "Steamm", "url": "https://steamm.fi/swap/SUI-SEND"},
+    {"name": "Hop", "url": "https://hop.ag/"},
+    {"name": "Mstable", "url": "https://mstable.io/#/mint/supersui"},
+    {"name": "DeSui", "url": "https://winx.io/"},
+    {"name": "Sudo", "url": "https://app.sudo.finance/trade"},
+    {"name": "Thebirds", "url": "https://thebirds.ai/DEFAI/chat"},
+    {"name": "Magma", "url": "https://app.magmafinance.io/"},
+    {"name": "Ika", "url": "https://inksack.wal.app/#"},
+    {"name": "    ", "url": "   "},
+    {"name": "    ", "url": "   "},
+    {"name": "    ", "url": "   "},
+    
+    // {"name": "    ", "url": "   "},
+    // {"name": "    ", "url": "   "},
+    ];
+
+
+
+        const hightTags =  [
+        {"name": "sui ai", "url": "https://suiai.fun/"},
+        {"name": "tradeport", "url": "https://www.tradeport.xyz/?tab=trending"}
+        ];
+
+
+
+
+
+        const fixedTags = [
+
+        {"name": "7k", "url": "https://7k.ag/swap"},
+        {"name": "7k fun", "url": "https://7k.fun/"},
+        {"name": "Momentum", "url": "https://app.mmt.finance/trade"},
+        {"name": "haedal", "url": "https://www.haedal.xyz/"},
+        {"name": "springsui", "url": "https://springsui.com/SUI-sSUI"},
+        {"name": "投票", "url": "https://vote.suins.io/"},
+        {"name": "iSui", "url": "https://springsui.com/SUI-iSUI"},
+
+        {"name": "SQUID", "url": "https://www.tradeport.xyz/sui/collection/squid-keys?bottomTab=trades&tab=items"},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "}
+
+        
+        ];
+
+
+        
+        
+        //  const tags = [
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "},
+        // {"name": "    ", "url": "   "}
+            
+        // ];
+
+
+
+
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function handleTagClick(tagElement, checkbox, counterElement, tagName) {
+        if (!checkbox.classList.contains('checked')) {
+            checkbox.classList.add('checked');
+        }
+            const currentCount = parseInt(counterElement.textContent);
+        counterElement.textContent = currentCount + 1;
+        window.open(tagName.url, '_blank');
+        }
+
+
+
+        function generateTags() {
+            const container = document.getElementById('tag-container');
+            // shuffleArray(tags);
+
+            tags.forEach((tag, index) => {
+                const tagElement = document.createElement('div');
+                tagElement.classList.add('tag');
+
+                // const tagNumber = document.createElement('span');
+                // tagNumber.classList.add('number');
+                // tagNumber.textContent = index + 1;
+                // tagElement.appendChild(tagNumber);
+
+                const tagName = document.createElement('span');
+                tagName.textContent = tag.name;
+                tagElement.appendChild(tagName);
+
+                const checkbox = document.createElement('div');
+                checkbox.classList.add('checkbox');
+                tagElement.appendChild(checkbox);
+
+                const counterElement = document.createElement('span');
+                // counterElement.classList.add('counter');
+                // counterElement.textContent = "0";
+                // tagElement.appendChild(counterElement);
+
+                tagElement.onclick = () => handleTagClick(tagElement, checkbox, counterElement, tag);
+
+                container.appendChild(tagElement);
+            });
+        }
+        
+        function generateFixedTags() {
+            const fixedTagsContainer = document.getElementById('fixed-tags-container');
+            shuffleArray(fixedTags);
+
+
+            fixedTags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.classList.add('tag');
+                tagElement.textContent = tag.name;
+                tagElement.onclick = () => window.open(tag.url, '_blank');
+                fixedTagsContainer.appendChild(tagElement);
+            });
+        }
+
+
+        function generateHightTags() {
+            const fixedTagsContainer = document.getElementById('hight-tags-container');
+            hightTags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.classList.add('tag');
+                tagElement.textContent = tag.name;
+                tagElement.onclick = () => window.open(tag.url, '_blank');
+                fixedTagsContainer.appendChild(tagElement);
+            });
+        }
+
+
+        
+
+
+        function generateMETags() {
+            const fixedTagsContainer = document.getElementById('me-tags-container');
+            // shuffleArray(meTags);
+
+            meTags.forEach(tag => {
+                const tagElement = document.createElement('div');
+                tagElement.classList.add('tag');
+                tagElement.textContent = tag.name;
+                tagElement.onclick = () => window.open(tag.url, '_blank');
+                fixedTagsContainer.appendChild(tagElement);
+            });
+        }
+
+        generateMETags();
+        generateHightTags();
+        generateFixedTags();
+        generateTags();
+
+
+    </script>
+</body>
+</html>
