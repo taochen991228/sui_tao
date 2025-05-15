@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>小桃工作室 - SUI生态导航</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- 顶部 big tag -->
+    <div id="top-tags" class="container">
+        <div class="big-tag" data-url="https://suiscan.xyz/mainnet/home">suiscan</div>
+        <div class="big-tag" data-url="chrome-extension://opcgpfmipidbgpenhmajoajpbobppdil/index.html#/Home/Tokens">钱包扩展</div>
+    </div>
+
+    <!-- 所有其他分组容器 -->
+    <div class="container" id="group-tags-container"></div>
+
+    <script>
+    (() => {
+        const tagGroups = [
+            {
+                title: "ME生态",
+                tags: [
+                    { name: "Suilend", url: "https://suilend.fi/swap/SUI-SEND" },
+                    { name: "Cetus", url: "https://app.cetus.zone/swap" },
+                    { name: "Navi", url: "https://app.naviprotocol.io/" },
+                    { name: "Aftermath", url: "https://aftermath.finance/trade?from=USDC&to=SUI" },
+                    { name: "Nexa", url: "https://app.nexa.xyz/" },
+                    { name: "Steamm", url: "https://steamm.fi/swap/SUI-SEND" },
+                    { name: "Hop", url: "https://hop.ag/" },
+                    { name: "Mstable", url: "https://mstable.io/#/mint/supersui" },
+                    { name: "DeSui", url: "https://winx.io/" },
+                    { name: "Sudo", url: "https://app.sudo.finance/trade" },
+                    { name: "Thebirds", url: "https://thebirds.ai/DEFAI/chat" },
+                    { name: "Magma", url: "https://app.magmafinance.io/" },
+                    { name: "Ika", url: "https://inksack.wal.app/#" }
+                ]
+            },
+            {
+                title: "重点项目",
+                tags: [
+                    { name: "sui ai", url: "https://suiai.fun/" },
+                    { name: "tradeport", url: "https://www.tradeport.xyz/?tab=trending" }
+                ]
+            },
+            {
+                title: "固定推荐",
+                tags: [
+                    { name: "7k", url: "https://7k.ag/swap" },
+                    { name: "7k fun", url: "https://7k.fun/" },
+                    { name: "Momentum", url: "https://app.mmt.finance/trade" },
+                    { name: "haedal", url: "https://www.haedal.xyz/" },
+                    { name: "springsui", url: "https://springsui.com/SUI-sSUI" },
+                    { name: "投票", url: "https://vote.suins.io/" },
+                    { name: "iSui", url: "https://springsui.com/SUI-iSUI" },
+                    { name: "SQUID", url: "https://www.tradeport.xyz/sui/collection/squid-keys?bottomTab=trades&tab=items" }
+                ]
+            }
+        ];
+
+        function createTagElement(tag) {
+            const el = document.createElement('div');
+            el.className = 'tag';
+            el.textContent = tag.name;
+            el.dataset.url = tag.url;
+            el.addEventListener('click', () => {
+                window.open(tag.url, '_blank');
+            });
+            return el;
+        }
+
+        function renderGroups() {
+            const container = document.getElementById('group-tags-container');
+            container.innerHTML = '';
+
+            tagGroups.forEach(group => {
+                // 分组标题
+                const title = document.createElement('div');
+                title.className = 'category-title';
+                title.textContent = group.title;
+                container.appendChild(title);
+
+                // 标签组
+                const tagGroup = document.createElement('div');
+                tagGroup.className = 'tag-group';
+                group.tags.forEach(tag => {
+                    tagGroup.appendChild(createTagElement(tag));
+                });
+                container.appendChild(tagGroup);
+            });
+        }
+
+        function bindBigTagClicks() {
+            document.querySelectorAll('.big-tag').forEach(el => {
+                el.addEventListener('click', () => {
+                    const url = el.dataset.url;
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            bindBigTagClicks();
+            renderGroups();
+        });
+    })();
+    </script>
+</body>
+</html>
