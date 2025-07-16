@@ -228,7 +228,7 @@
     {"name": "Cetus", "url": "https://app.cetus.zone/swap"},
     {"name": "Navi", "url": "https://app.naviprotocol.io/"},
     {"name": "Aftermath ", "url": "https://aftermath.finance/trade?from=USDC&to=SUI"},
-    {"name": "Nexa", "url": "https://app.nexa.xyz/"},
+
     {"name": "Steamm", "url": "https://steamm.fi/swap/SUI-SEND"},
     {"name": "Hop", "url": "https://hop.ag/"},
     {"name": "Mstable", "url": "https://mstable.io/#/mint/supersui"},
@@ -237,9 +237,9 @@
     {"name": "Thebirds", "url": "https://thebirds.ai/DEFAI/chat"},
     {"name": "Magma", "url": "https://app.magmafinance.io/"},
     {"name": "Ika", "url": "https://inksack.wal.app/#"},
-    {"name": "    ", "url": "   "},
-    {"name": "    ", "url": "   "},
-    {"name": "    ", "url": "   "},
+    // {"name": "    ", "url": "   "},
+    // {"name": "    ", "url": "   "},
+    // {"name": "    ", "url": "   "},
     
     // {"name": "    ", "url": "   "},
     // {"name": "    ", "url": "   "},
@@ -248,8 +248,11 @@
 
 
         const hightTags =  [
-        {"name": "sui ai", "url": "https://suiai.fun/"},
-        {"name": "tradeport", "url": "https://www.tradeport.xyz/?tab=trending"}
+        // {"name": "sui ai", "url": "https://suiai.fun/"},
+        // {"name": "tradeport", "url": "https://www.tradeport.xyz/?tab=trending"}
+        {"name": "springsui", "url": "https://springsui.com/SUI-sSUI"},
+        {"name": "Nexa", "url": "https://app.nexa.xyz/"},
+
         ];
 
 
@@ -262,7 +265,7 @@
         {"name": "7k fun", "url": "https://7k.fun/"},
         {"name": "Momentum", "url": "https://app.mmt.finance/trade"},
         {"name": "haedal", "url": "https://www.haedal.xyz/"},
-        {"name": "springsui", "url": "https://springsui.com/SUI-sSUI"},
+
         {"name": "投票", "url": "https://vote.suins.io/"},
         {"name": "iSui", "url": "https://springsui.com/SUI-iSUI"},
 
@@ -350,7 +353,9 @@
         
         function generateFixedTags() {
             const fixedTagsContainer = document.getElementById('fixed-tags-container');
-            shuffleArray(fixedTags);
+            
+            //打乱代币
+            // shuffleArray(fixedTags);
 
 
             fixedTags.forEach(tag => {
